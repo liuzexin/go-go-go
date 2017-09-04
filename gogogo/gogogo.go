@@ -1,0 +1,6 @@
+package gogogo
+
+/**
+	Go Archture
+	
+*/
