@@ -1,16 +1,19 @@
-package main
+package pro
 
 import (
-	"gogogo"
+	"../gogogo"
 )
 
-type MyController struct{
-	Controller
+type MyController struct {
+	gogogo.Controller
+	time int
 }
 
-
-func  ActionDemo() (str string) {
-		str := "test"
-		return
+func (this *MyController) ActionDemo() (str string) {
+	str = "test"
+	return
 }
 
+func NewMyController() (controller *MyController) {
+	return new(MyController)
+}
