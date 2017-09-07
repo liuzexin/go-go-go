@@ -1,7 +1,6 @@
 package gogogo
 
 import (
-	// "errors"
 	"fmt"
 	"net/http"
 	"reflect"
@@ -50,14 +49,16 @@ func (this *ManageController) Run() {
 
 func GetResult(route []string) (str string) {
 	controller := Manage.routeMap[route[0]]
-	fmt.Println(controller, Manage.routeMap)
-	v := reflect.ValueOf(controller)
-	v = v.MethodByName(route[1])
+	v := reflect.New(reflect.TypeOf(controller))
+	fmt.Println(reflect.ValueOf(&controller))
+	fmt.Println(reflect.ValueOf(controller))
+	method := v.MethodByName(route[1])
+	fmt.Println(method)
 	//Now only need string
 	// f := v.Func
 	// res := f.Call([]reflect.Value{reflect.Zero(reflect.TypeOf(new(Controller)))})
 	fmt.Println(v.Interface())
-	res := v.Call([]reflect.Value{reflect.Zero(reflect.TypeOf(new(Controller)))})
+	res := method.Call([]reflect.Value{})
 	str, _ = res[0].Interface().(string)
 	return
 }
@@ -69,7 +70,14 @@ func ParseRoute(r *http.Request) (route []string) {
 		return c == separte
 	}
 	route = strings.FieldsFunc(path, f)
+	fmt.Println(route)
 	route[0] = strings.Title(route[0]) + "Controller"
 	route[1] = "Action" + strings.Title(route[1])
 	return
+}
+
+func CheckError(err error) {
+	if err != nil {
+		fmt.Println(err)
+	}
 }

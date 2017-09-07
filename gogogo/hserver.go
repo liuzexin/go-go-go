@@ -1,7 +1,9 @@
 package gogogo
 
 import (
+	"io"
 	"net/http"
+	"strconv"
 )
 
 var Port, Dest string
@@ -29,8 +31,10 @@ func StartServer() {
 }
 
 func ServerHttp(w http.ResponseWriter, r *http.Request) {
-	go func(w http.ResponseWriter, r *http.Request) {
+	func(w http.ResponseWriter, r *http.Request) {
 		res := GetResult(ParseRoute(r))
-		w.Write([]byte(res))
+		w.Header().Add("Content-Length", strconv.Itoa(len(res)))
+		_, err := io.WriteString(w, res)
+		CheckError(err)
 	}(w, r)
 }

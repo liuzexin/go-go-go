@@ -3,7 +3,6 @@ package main
 import (
 	"./gogogo"
 	"./pro"
-	"fmt"
 )
 
 /**
@@ -23,7 +22,6 @@ Service
 func main() {
 
 	controller := pro.NewMyController()
-	fmt.Println(*controller)
 	gogogo.Manage.SetRouteMapWithController(*controller)
 	gogogo.Manage.Run()
 }
