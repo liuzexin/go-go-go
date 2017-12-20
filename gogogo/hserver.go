@@ -15,7 +15,8 @@ var Port, Dest string
 // }
 
 func init() {
-
+	Port = "80"
+	Dest = "127.0.0.1"
 }
 
 func SetDomainPort(des, port string) {

@@ -18,6 +18,11 @@ Model
 	Model base on mysql
 Service
 
+TODO:
+
+Go don't support the dynamic loading go file or code.
+Only through by exec command way to execute the code.
+
 */
 func main() {
 
